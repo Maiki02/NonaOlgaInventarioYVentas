@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.encabezado {
+	background-image: url("../img/panaderia.jpg");
+}
+
+#titulo {
+	text-align: center;
+	font-size: 20px;
+	margin: 0px;
+	padding: 0;
+	background: rgba(22, 30, 135, 0.05);
+}

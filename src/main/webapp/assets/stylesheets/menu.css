@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.menu{
+	display:flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	background: #fea558;
+	
+}
+
+ul{
+	
+	margin: 0;
+}
+
+.menu li {
+	display: block;
+	float: left;
+	padding: 12px 35px;
+	background: #ffa558cf;
+}
+
+
+a {
+	color: #000;
+	font-size: 22px;
+	text-decoration: none;
+}
+
+.menu li:hover {
+background: #ffc18c;
+transition: .2s;
+}

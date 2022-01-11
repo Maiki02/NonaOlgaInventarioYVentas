@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.registros {
+	margin: 0px auto;
+	width: 335px;
+	height: 300px;
+	position: relative;
+	
+	background:#000;
+	padding: 25px 70px;
+	border: 2px solid black;
+	z-index: 50;
+}
+
+.registros p {
+	text-align: center;
+	font-size: 20px;
+	margin: 0px 0 50px 0;
+}
+
+.registros div {
+	display: block;
+	padding: 10px 10px;
+	margin: 5px;
+	background: #fff;
+	text-align: center;
+	font-size: 20px;
+	width: 300px;
+	border: 1px solid black;
+}
+
+.registros div:active {
+	background: black;
+	color: #fff;
+}
+
+.registros div:hover {
+	background: #aaa;
+	transition: .2s;
+}
