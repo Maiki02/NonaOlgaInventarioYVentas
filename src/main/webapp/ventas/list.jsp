@@ -6,8 +6,7 @@
 <head>
 <jsp:include page="/partials/head.jsp"></jsp:include>
 
-<script type="text/javascript" src="../assets/scripts/agregarVenta.js"
-	defer></script>
+
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -39,8 +38,9 @@
 	});
 </script>
 
-
-
+<script type="text/javascript" src="../assets/scripts/datosVenta.js"
+	defer></script>
+	
 </head>
 <body>
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
@@ -54,9 +54,12 @@
 		</div>
 	</c:if>
 	<section>
+	<p id="info"><p>
+	
+	
 		<div class="container my-3">
 				<div class="table-responsive">
-					<table class="datatable table table-bordered table-striped"
+					<table class="datatable table table-bordered table-striped" id="tabla" 
 						class="display" style="width: 100%">
 						<thead>
 							<tr>

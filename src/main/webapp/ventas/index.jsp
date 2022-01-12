@@ -15,20 +15,62 @@
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
 	<br>
 	<section>
-	<form action="/Nonaolga/ventas/listDay.do" method="get" class="form-inline">
-	<input id="date" type="date" name="date"  class="form-control col-md-4">
-<button type="submit" class="btn btn-success"><i class="fas fa-search-dollar"></i></button>
-	
-	
-	
-	</form>
+		<div class="mb-3">
+			<form action="/Nonaolga/ventas/listDate.do" method="get"
+				class="form-inline">
+				<label>Busqueda por día:</label> <br>
+				<input id="date" type="date"
+					name="date" class="form-control col-md-4">
+					<input type="number" name="tipo-busqueda" readonly style="visibility:hidden; display:none;" value="1">
+				<button type="submit" class="btn btn-success">
+					<i class="fas fa-search-dollar"></i>
+				</button>
+
+
+
+			</form>
+		</div>
+		<div class="mb-3">
+			<form action="/Nonaolga/ventas/listDate.do" method="get"
+				class="form-inline">
+				<label>Busqueda por semana:</label><br> <input id="date" type="date"
+					name="date" class="form-control col-md-4">
+					<input type="number" name="tipo-busqueda" readonly style="visibility:hidden; display:none;" value="2">
+				<button type="submit" class="btn btn-success">
+					<i class="fas fa-search-dollar"></i>
+				</button>
+
+			</form>
+		</div>
 		
+		<div class="mb-3">
+			<form action="/Nonaolga/ventas/listDate.do" method="get"
+				class="form-inline">
+				<label>Busqueda por mes:</label><br> <input id="date" type="date"
+					name="date" class="form-control col-md-4">
+					<input type="number" name="tipo-busqueda" readonly style="visibility:hidden; display:none;" value="3">
+				<button type="submit" class="btn btn-success">
+					<i class="fas fa-search-dollar"></i>
+				</button>
+
+			</form>
+		</div>
 		
-		<button type="button" class="btn btn-success">Ventas de ayer</button>
-		<button type="button" class="btn btn-success">Ventas de la semana</button>
-		<button type="button" class="btn btn-success">Ventas del mes</button>
-		<button type="button" class="btn btn-success">Ventas del año</button>
-		<a href="/Nonaolga/ventas/list.do"><button type="button" class="btn btn-success">Ventas historicas</button></a>
+			<div class="mb-3">
+			<form action="/Nonaolga/ventas/listDate.do" method="get"
+				class="form-inline">
+				<label>Busqueda por año:</label><br> <input id="date" type="date"
+					name="date" class="form-control col-md-4">
+					<input type="number" name="tipo-busqueda" readonly style="visibility:hidden; display:none;" value="4">
+				<button type="submit" class="btn btn-success">
+					<i class="fas fa-search-dollar"></i>
+				</button>
+
+			</form>
+		</div>
+
+		<a href="/Nonaolga/ventas/list.do"><button type="button"
+				class="btn btn-success">Ventas historicas</button></a>
 
 
 	</section>

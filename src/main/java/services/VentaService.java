@@ -1,8 +1,8 @@
 package services;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.time.*;
 
 import ipersistence.*;
 import model.*;
@@ -28,13 +28,45 @@ public class VentaService {
 	
 	public List<Venta> listForDate(String fecha) {
 		try {
-			return ventaDAO.findAllForDate(fecha);
+			return ventaDAO.findAllFor("dia", fecha);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		return null;
 	}
 	
+	public List<Venta> listForWeek(String fecha) {
+		LocalDate fechaSeleccionada= LocalDate.parse(fecha);
+		LocalDate fechaInicioSemana= fechaSeleccionada.plusDays(-fechaSeleccionada.getDayOfWeek().getValue() + 1);
+		try {
+			return ventaDAO.findAllFor("semana",fechaInicioSemana.toString());
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	public List<Venta> listForMonth(String fecha) {
+		String fechaInicioMes= fecha.substring(0, 7);//Tomamos el año y el mes
+		try {
+			return ventaDAO.findAllFor("mes",fechaInicioMes);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	public List<Venta> listForYear(String fecha) {
+		String fechaInicioMes= fecha.substring(0, 4);//Tomamos el año
+		try {
+			return ventaDAO.findAllFor("anio",fechaInicioMes);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+
+
 
 	public Venta create(Double precioVenta, String metodoPago, String[] listaProductos) throws SQLException {
 		List<Producto> productosVendidos= new ArrayList<Producto>();

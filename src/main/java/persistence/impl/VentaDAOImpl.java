@@ -38,8 +38,14 @@ public class VentaDAOImpl implements VentaDAO {
 	}
 
 	@Override
-	public List<Venta> findAllForDate(String date) throws SQLException {
-		String sql="WHERE fecha LIKE ('"+date+"%');";
+	public List<Venta> findAllFor(String tiempo, String date) throws SQLException {
+		String sql=null;
+		if(tiempo.equals("dia") || tiempo.equals("mes") || tiempo.equals("anio")) {
+			sql="WHERE fecha LIKE ('"+date+"%');";
+		} else if(tiempo.equals("semana")) {
+			sql="WHERE DATE_ADD(fecha, INTERVAL(-WEEKDAY(fecha)) DAY) LIKE ('"+date+"%');";
+		}
+		
 		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement instruccion = conn.prepareStatement(SQL_LISTAR + sql);
 		ResultSet rs = instruccion.executeQuery();
@@ -58,10 +64,7 @@ public class VentaDAOImpl implements VentaDAO {
 		}
 
 		return ventas;
-	}
-
-	
-	
+	}	
 	
 	private List<Producto> obtenerProductosComprados(int id) throws SQLException {
 		Connection conn = ConnectionProvider.getConnection();
