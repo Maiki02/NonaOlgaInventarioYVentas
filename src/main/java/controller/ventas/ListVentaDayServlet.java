@@ -15,12 +15,12 @@ import model.Producto;
 import model.Venta;
 import services.*;
 
-@WebServlet("/ventas/list.do")
-public class ListVentaServlet extends HttpServlet {
+@WebServlet("/ventas/listDay.do")
+public class ListVentaDayServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1537949074766873118L;
-	private ProductoService productoService;
 	private VentaService ventaService;
+	private ProductoService productoService;
 
 	@Override
 	public void init() throws ServletException {
@@ -31,7 +31,8 @@ public class ListVentaServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Venta> ventas = ventaService.list();
+		String fecha=req.getParameter("date");
+		List<Venta> ventas = ventaService.listForDate(fecha);
 		req.setAttribute("ventas", ventas);
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ventas/list.jsp");

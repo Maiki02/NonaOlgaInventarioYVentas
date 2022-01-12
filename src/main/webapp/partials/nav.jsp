@@ -12,7 +12,7 @@
 				<li class="nav-item"><a class="nav-link"
 					href="/Nonaolga/productos/index.do">Productos</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="/Nonaolga/ventas/index.do">Ventas</a></li>
+					href="/Nonaolga/ventas/index.jsp">Ventas</a></li>
 				<li class="nav-item"><a class="nav-link" href="/Nonaolga/datos/index.jsp">Más opciones</a></li>
 			</ul>
 			<!--  --			<ul>

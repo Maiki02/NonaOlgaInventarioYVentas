@@ -20,7 +20,7 @@ public class App {
 		
 		Producto nuevoProducto=	new Producto(8, "Detergente 1L", "Limpieza", "Zorro", 50, 85, 9);
 		//System.out.println("Se realio el registro: " + productoDAO.insert(nuevoProducto));
-		System.out.println(productoDAO.sumarStock(nuevoProducto, -4));
+		//System.out.println(productoDAO.sumarStock(nuevoProducto, -4));
 		
 		Producto p=new Producto(1, "Leche", "Lacteo", "Milkaut", 80, 110, 19);
 		productoDAO.update(p);

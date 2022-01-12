@@ -14,8 +14,11 @@ public class ConnectionProvider {
 
 	private static Connection connection;
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASS = "admin";
-    private static final String JDBC_URL2 = "jdbc:mysql://localhost:3306/inventario?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String JDBC_PASS1 = "admin";
+    private static final String JDBC_PASS2 = "6Hu88CIMdF";
+    private static final String JDBC_URL1= "jdbc:mysql://localhost:3306/inventario?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String JDBC_URL2 = "jdbc:mysql://node89168-nonaolga.jelastic.saveincloud.net"
+    		+ ":3306/inventario?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
 
 	public static Properties readPropertiesFile(String fileName) {
 		FileInputStream fis = null;
@@ -45,7 +48,7 @@ public class ConnectionProvider {
 			throw new SQLException(e);
 		}
 		if (connection == null) {
-			connection = DriverManager.getConnection(JDBC_URL2, JDBC_USER, JDBC_PASS);
+			connection = DriverManager.getConnection(JDBC_URL1, JDBC_USER, JDBC_PASS1);
 		}
 		return connection;
 	}

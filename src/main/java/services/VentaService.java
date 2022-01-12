@@ -26,6 +26,15 @@ public class VentaService {
 		return null;
 	}
 	
+	public List<Venta> listForDate(String fecha) {
+		try {
+			return ventaDAO.findAllForDate(fecha);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return null;
+	}
+	
 
 	public Venta create(Double precioVenta, String metodoPago, String[] listaProductos) throws SQLException {
 		List<Producto> productosVendidos= new ArrayList<Producto>();

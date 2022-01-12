@@ -10,7 +10,7 @@ import persistence.commons.DAOFactory;
 
 public class VentaDAOImpl implements VentaDAO {
 	private static final String SQL_LISTAR = "SELECT * FROM ventas "
-			+ "LEFT JOIN metodos_de_pago ON metodos_de_pago.id_metodo = ventas.id_metodo_de_pago";
+			+ "LEFT JOIN metodos_de_pago ON metodos_de_pago.id_metodo = ventas.id_metodo_de_pago ";
 	private static final String SQL_INSERTAR = "INSERT INTO ventas (precio_total, id_metodo_de_pago, costo_venta) VALUES (?,?,?);";
 	private static final String SQL_UPDATE = "UPDATE ventas SET precio_total=?, id_metodo_de_pago=? WHERE id = ?";
 	private static final String SQL_DELETE = "DELETE FROM ventas WHERE id = ?";
@@ -37,6 +37,31 @@ public class VentaDAOImpl implements VentaDAO {
 		return ventas;
 	}
 
+	@Override
+	public List<Venta> findAllForDate(String date) throws SQLException {
+		String sql="WHERE fecha LIKE ('"+date+"%');";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement instruccion = conn.prepareStatement(SQL_LISTAR + sql);
+		ResultSet rs = instruccion.executeQuery();
+		List<Venta> ventas = new ArrayList<Venta>();
+
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			String fecha = rs.getString("fecha");
+			Double precioDeVenta = rs.getDouble("precio_total");
+			String metodoDePago = rs.getString("metodo_de_pago");
+			Double costo= rs.getDouble("costo_venta");
+			List<Producto> productosVendidos = obtenerProductosComprados(id);
+
+			Venta venta = new Venta(id, fecha, metodoDePago, productosVendidos, precioDeVenta, costo);
+			ventas.add(venta);
+		}
+
+		return ventas;
+	}
+
+	
+	
 	
 	private List<Producto> obtenerProductosComprados(int id) throws SQLException {
 		Connection conn = ConnectionProvider.getConnection();
