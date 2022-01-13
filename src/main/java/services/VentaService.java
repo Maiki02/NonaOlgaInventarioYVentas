@@ -68,7 +68,7 @@ public class VentaService {
 
 
 
-	public Venta create(Double precioVenta, String metodoPago, String[] listaProductos) throws SQLException {
+	public Venta create(Double precioVenta, String metodoPago, String[] listaProductos, String nombreCliente) throws SQLException {
 		List<Producto> productosVendidos= new ArrayList<Producto>();
 		
 		for(String producto: listaProductos) {
@@ -78,7 +78,7 @@ public class VentaService {
 			productosVendidos.add(productoVendido);
 		}
 		
-		Venta venta= new Venta(metodoPago, precioVenta, productosVendidos);
+		Venta venta= new Venta(metodoPago, precioVenta, productosVendidos, nombreCliente);
 		ventaDAO.insert(venta); //Insertamos la venta
 		venta.setId(ventaDAO.saberUltimoId()); //Obtenemos su ID
 		

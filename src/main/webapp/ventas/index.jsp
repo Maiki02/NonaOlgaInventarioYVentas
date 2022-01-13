@@ -7,8 +7,6 @@
 
 <script src="https://kit.fontawesome.com/555dcb9a92.js"
 	crossorigin="anonymous"></script>
-<script type="text/javascript" src="../assets/scripts/datosVenta.js"
-	defer></script>
 
 </head>
 <body>

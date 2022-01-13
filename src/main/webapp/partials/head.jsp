@@ -32,7 +32,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap"
 	rel="stylesheet">
-
+<script src="https://kit.fontawesome.com/555dcb9a92.js" defer crossorigin="anonymous"></script>
 
 
 

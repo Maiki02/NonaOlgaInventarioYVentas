@@ -47,9 +47,10 @@ public class AddVentaServlet extends HttpServlet {
 		Double precioVenta= Double.parseDouble(req.getParameter("precio-venta"));
 		String metodoPago= req.getParameter("metodo-pago");
 		String[] listaProductos= req.getParameter("productos-vendidos").split(";");
+		String nombreCliente= req.getParameter("nombre-cliente");
 
 		try {
-			ventaService.create(precioVenta, metodoPago, listaProductos);
+			ventaService.create(precioVenta, metodoPago, listaProductos, nombreCliente);
 			resp.sendRedirect("/Nonaolga/index.jsp");
 		} catch(Exception e) {
 			req.setAttribute("flash", "Ocurrio un error cargando la venta");

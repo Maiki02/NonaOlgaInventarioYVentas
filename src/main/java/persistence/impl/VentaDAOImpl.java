@@ -11,8 +11,8 @@ import persistence.commons.DAOFactory;
 public class VentaDAOImpl implements VentaDAO {
 	private static final String SQL_LISTAR = "SELECT * FROM ventas "
 			+ "LEFT JOIN metodos_de_pago ON metodos_de_pago.id_metodo = ventas.id_metodo_de_pago ";
-	private static final String SQL_INSERTAR = "INSERT INTO ventas (precio_total, id_metodo_de_pago, costo_venta) VALUES (?,?,?);";
-	private static final String SQL_UPDATE = "UPDATE ventas SET precio_total=?, id_metodo_de_pago=? WHERE id = ?";
+	private static final String SQL_INSERTAR = "INSERT INTO ventas (precio_total, id_metodo_de_pago, costo_venta, nombre_cliente) VALUES (?,?,?,?);";
+	private static final String SQL_UPDATE = "UPDATE ventas SET precio_total=?, id_metodo_de_pago=?, nombre_cliente=? WHERE id = ?";
 	private static final String SQL_DELETE = "DELETE FROM ventas WHERE id = ?";
 
 	@Override
@@ -23,18 +23,24 @@ public class VentaDAOImpl implements VentaDAO {
 		List<Venta> ventas = new ArrayList<Venta>();
 
 		while (rs.next()) {
-			int id = rs.getInt("id");
-			String fecha = rs.getString("fecha");
-			Double precioDeVenta = rs.getDouble("precio_total");
-			String metodoDePago = rs.getString("metodo_de_pago");
-			Double costo= rs.getDouble("costo_venta");
-			List<Producto> productosVendidos = obtenerProductosComprados(id);
-
-			Venta venta = new Venta(id, fecha, metodoDePago, productosVendidos, precioDeVenta, costo);
+			Venta venta = toVenta(rs);
 			ventas.add(venta);
 		}
 
 		return ventas;
+	}
+
+	private Venta toVenta(ResultSet rs) throws SQLException {
+		int id = rs.getInt("id");
+		String fecha = rs.getString("fecha");
+		Double precioDeVenta = rs.getDouble("precio_total");
+		String metodoDePago = rs.getString("metodo_de_pago");
+		Double costo= rs.getDouble("costo_venta");
+		List<Producto> productosVendidos = obtenerProductosComprados(id);
+		String nombreCliente= rs.getString("nombre_cliente");
+
+		Venta venta = new Venta(id, fecha, metodoDePago, productosVendidos, precioDeVenta, costo, nombreCliente);
+		return venta;
 	}
 
 	@Override
@@ -52,14 +58,7 @@ public class VentaDAOImpl implements VentaDAO {
 		List<Venta> ventas = new ArrayList<Venta>();
 
 		while (rs.next()) {
-			int id = rs.getInt("id");
-			String fecha = rs.getString("fecha");
-			Double precioDeVenta = rs.getDouble("precio_total");
-			String metodoDePago = rs.getString("metodo_de_pago");
-			Double costo= rs.getDouble("costo_venta");
-			List<Producto> productosVendidos = obtenerProductosComprados(id);
-
-			Venta venta = new Venta(id, fecha, metodoDePago, productosVendidos, precioDeVenta, costo);
+			Venta venta=toVenta(rs);
 			ventas.add(venta);
 		}
 
@@ -100,6 +99,7 @@ public class VentaDAOImpl implements VentaDAO {
 		instruccion.setDouble(1, t.getPrecioDeVenta());
 		instruccion.setInt(2, obtenerID(t.getMetodoDePago()));
 		instruccion.setDouble(3, t.getCosto());
+		instruccion.setString(4, t.getNombreCliente());
 		return instruccion.executeUpdate();
 	}
 
@@ -132,7 +132,8 @@ public class VentaDAOImpl implements VentaDAO {
 		PreparedStatement instruccion = conn.prepareStatement(SQL_UPDATE);
 		instruccion.setDouble(1, t.getPrecioDeVenta());
 		instruccion.setInt(2, obtenerID(t.getMetodoDePago()));
-		instruccion.setInt(3, t.getID());
+		instruccion.setString(3, t.getNombreCliente());
+		instruccion.setInt(4, t.getID());
 
 
 		return instruccion.executeUpdate();

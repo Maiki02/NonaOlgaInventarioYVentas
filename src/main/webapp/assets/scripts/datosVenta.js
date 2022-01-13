@@ -5,7 +5,6 @@ let ganancia=0;
 let tabla = document.getElementById('tabla');
 let info = document.getElementById('info');
 
-
 //El primer valor representa la suma del precio de costo
 //El segundo representa la suma del precio de venta
 //El tercero representa la diferencia entre los dos primeros valores (ganancia)
@@ -23,10 +22,8 @@ function obtenerGanancia(precioVenta, costo) {
 }
 
 function ponerDatos() {
-
+	sumarValores();
 	info.insertAdjacentHTML('beforeend', "<p>Costo: " + costoFinal + "</p>" +
 		"<p>Precio total: " + precioVentaFinal + "</p>" +
 		"<p>Ganancia: " + ganancia + "</p>");
 }
-
-ponerDatos();

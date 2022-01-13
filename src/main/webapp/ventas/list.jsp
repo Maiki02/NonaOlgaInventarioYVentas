@@ -54,6 +54,7 @@
 		</div>
 	</c:if>
 	<section>
+	<input type="button" onclick='ponerDatos();' class="btn btn-success" value="Obtener datos">
 	<p id="info"><p>
 	
 	
