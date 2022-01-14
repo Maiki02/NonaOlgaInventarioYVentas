@@ -20,9 +20,13 @@
 				onclick="location='/Nonaolga/productos/create.do'" />
 
 			<!-- Modal -->
-			<button type="button" class="btn btn-lg btn-success"
+			<button type="button" class="btn btn-lg btn-warning"
 				data-toggle="modal" data-target="#exampleModalCenter">
 				Ingreso de mercaderías</button>
+
+			<input type="button" value="Gastos varios"
+				class="btn btn-lg btn-danger"
+				onclick="" />
 
 			<!-- Modal -->
 			<div class="modal fade" id="exampleModalCenter" tabindex="-1"

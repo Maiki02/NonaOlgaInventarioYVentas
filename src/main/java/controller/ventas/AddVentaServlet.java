@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Producto;
+import model.Venta;
 import services.*;
 
 @WebServlet("/ventas/create.do")
@@ -19,6 +20,7 @@ public class AddVentaServlet extends HttpServlet {
 	private ProductoService productoService;
 	private MetodoDePagoService metodoDePagoService;
 	private VentaService ventaService;
+	private DeudorService deudorService;
 
 	@Override
 	public void init() throws ServletException {
@@ -27,6 +29,7 @@ public class AddVentaServlet extends HttpServlet {
 		this.ventaService= new VentaService();
 		this.productoService=new ProductoService();
 		this.metodoDePagoService = new MetodoDePagoService();
+		this.deudorService= new DeudorService();
 	}
 
 	@Override
@@ -47,11 +50,15 @@ public class AddVentaServlet extends HttpServlet {
 		Double precioVenta= Double.parseDouble(req.getParameter("precio-venta"));
 		String metodoPago= req.getParameter("metodo-pago");
 		String[] listaProductos= req.getParameter("productos-vendidos").split(";");
-		String nombreCliente= req.getParameter("nombre-cliente");
-
+		
 		try {
-			ventaService.create(precioVenta, metodoPago, listaProductos, nombreCliente);
+			Venta venta=ventaService.create(precioVenta, metodoPago, listaProductos);
 			resp.sendRedirect("/Nonaolga/index.jsp");
+			
+			if(metodoPago.equals("A PAGAR")) {
+				String nombreCliente= req.getParameter("nombre-cliente");
+				deudorService.create(nombreCliente, precioVenta, venta);
+			}
 		} catch(Exception e) {
 			req.setAttribute("flash", "Ocurrio un error cargando la venta");
 			System.err.println(e.getMessage());
@@ -59,7 +66,6 @@ public class AddVentaServlet extends HttpServlet {
 					.getRequestDispatcher("/ventas/create.jsp");
 			dispatcher.forward(req, resp);
 		}
-		
 		
 		
 	}

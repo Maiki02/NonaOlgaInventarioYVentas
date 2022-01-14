@@ -24,4 +24,13 @@ public class DAOFactory {
 	public static VentaDAO getVentaDAO() {
 		return new VentaDAOImpl();
 	}
+	
+	public static iDeudorDAO getDeudorDAO() {
+		return new DeudorDAOImpl();
+	}
+	
+	public static iProveedorDAO getProveedorDAO() {
+		return new ProveedorDAOImpl();
+	}
+	
 }

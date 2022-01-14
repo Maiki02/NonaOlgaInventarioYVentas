@@ -13,8 +13,12 @@
 	<br>
 	<section>
 		<div class="fondo">
-
-
+			<div class="botones" style="width: 80%; margin: auto;">
+				<a href="#"><button type="submit" class="btn btn-success">Agregar
+						producto</button> </a> <a href="#"><button type="submit"
+						class="btn btn-warning">Registrar pedido</button> </a> <a href="#"><button
+						type="submit" class="btn btn-danger">Registrar perdida</button> </a>
+			</div>
 			<div class="container my-3">
 				<div class="table-responsive">
 					<table class="datatable table table-bordered table-striped"
@@ -43,13 +47,16 @@
 										<div>
 											<a
 												href="/Nonaolga/productos/delete.do?id=${producto.getId() }"><button
-													type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> </button> </a>
-										
-											<a href="/Nonaolga/productos/edit.do?id=${producto.getId() }"><button
-													type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button> </a>
+													type="submit" class="btn btn-danger">
+													<i class="fas fa-trash"></i>
+												</button> </a> <a
+												href="/Nonaolga/productos/edit.do?id=${producto.getId() }"><button
+													type="submit" class="btn btn-success">
+													<i class="fas fa-edit"></i>
+												</button> </a>
 										</div>
 
-										
+
 									</td>
 								</tr>
 							</c:forEach>

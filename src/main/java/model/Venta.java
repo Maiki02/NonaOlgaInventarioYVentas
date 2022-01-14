@@ -12,43 +12,33 @@ public class Venta {
 	private List<Producto> productosVendidos;
 	private double precioDeVenta;
 	private double costo;
-	private String nombreCliente;
 	
-	public Venta(int id, String fecha, String metodoDePago, List<Producto> productosVendidos, double precioDeVenta, double costo, String nombreCliente) {
+	public Venta(int id, String fecha, String metodoDePago, List<Producto> productosVendidos, double precioDeVenta, double costo) {
 		this.id = id;
 		this.fecha = fecha;
 		this.metodoDePago= metodoDePago;
 		this.productosVendidos = productosVendidos;
 		this.precioDeVenta = precioDeVenta;
 		this.costo = costo;
-		this.nombreCliente=nombreCliente;
+		
 	}
 	
-	public Venta(int id, String fecha, String metodoDePago, List<Producto> productosVendidos, double precioDeVenta, String nombreCliente) {
+	public Venta(int id, String fecha, String metodoDePago, List<Producto> productosVendidos, double precioDeVenta) {
 		this.id = id;
 		this.fecha = fecha;
 		this.productosVendidos = productosVendidos;
 		this.metodoDePago= metodoDePago;
 		this.precioDeVenta = precioDeVenta;
 		this.costo= calcularCosto();
-		this.nombreCliente=nombreCliente;
 	}
 	
-	public Venta(String metodoDePago, double precioDeVenta, List<Producto> productosVendidos, String nombreCliente) {
+	public Venta(String metodoDePago, double precioDeVenta, List<Producto> productosVendidos) {
 		this.metodoDePago = metodoDePago;
 		this.productosVendidos = productosVendidos;
 		this.precioDeVenta = precioDeVenta;
 		this.costo= calcularCosto();
-		this.nombreCliente=nombreCliente;
 	}
 
-	public String getNombreCliente() {
-		return nombreCliente;
-	}
-
-	public void setNombreCliente(String nombreCliente) {
-		this.nombreCliente = nombreCliente;
-	}
 
 	public int getID() {
 		return id;

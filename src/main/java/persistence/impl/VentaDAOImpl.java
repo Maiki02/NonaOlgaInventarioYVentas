@@ -11,8 +11,8 @@ import persistence.commons.DAOFactory;
 public class VentaDAOImpl implements VentaDAO {
 	private static final String SQL_LISTAR = "SELECT * FROM ventas "
 			+ "LEFT JOIN metodos_de_pago ON metodos_de_pago.id_metodo = ventas.id_metodo_de_pago ";
-	private static final String SQL_INSERTAR = "INSERT INTO ventas (precio_total, id_metodo_de_pago, costo_venta, nombre_cliente) VALUES (?,?,?,?);";
-	private static final String SQL_UPDATE = "UPDATE ventas SET precio_total=?, id_metodo_de_pago=?, nombre_cliente=? WHERE id = ?";
+	private static final String SQL_INSERTAR = "INSERT INTO ventas (precio_total, id_metodo_de_pago, costo_venta) VALUES (?,?,?);";
+	private static final String SQL_UPDATE = "UPDATE ventas SET precio_total=?, id_metodo_de_pago=? WHERE id = ?";
 	private static final String SQL_DELETE = "DELETE FROM ventas WHERE id = ?";
 
 	@Override
@@ -37,9 +37,9 @@ public class VentaDAOImpl implements VentaDAO {
 		String metodoDePago = rs.getString("metodo_de_pago");
 		Double costo= rs.getDouble("costo_venta");
 		List<Producto> productosVendidos = obtenerProductosComprados(id);
-		String nombreCliente= rs.getString("nombre_cliente");
-
-		Venta venta = new Venta(id, fecha, metodoDePago, productosVendidos, precioDeVenta, costo, nombreCliente);
+		Venta venta= new Venta(id, fecha, metodoDePago, productosVendidos, precioDeVenta, costo);
+		
+		
 		return venta;
 	}
 
@@ -99,7 +99,6 @@ public class VentaDAOImpl implements VentaDAO {
 		instruccion.setDouble(1, t.getPrecioDeVenta());
 		instruccion.setInt(2, obtenerID(t.getMetodoDePago()));
 		instruccion.setDouble(3, t.getCosto());
-		instruccion.setString(4, t.getNombreCliente());
 		return instruccion.executeUpdate();
 	}
 
@@ -132,8 +131,7 @@ public class VentaDAOImpl implements VentaDAO {
 		PreparedStatement instruccion = conn.prepareStatement(SQL_UPDATE);
 		instruccion.setDouble(1, t.getPrecioDeVenta());
 		instruccion.setInt(2, obtenerID(t.getMetodoDePago()));
-		instruccion.setString(3, t.getNombreCliente());
-		instruccion.setInt(4, t.getID());
+		instruccion.setInt(3, t.getID());
 
 
 		return instruccion.executeUpdate();
@@ -158,6 +156,19 @@ public class VentaDAOImpl implements VentaDAO {
 			return rs.getInt(1);
 		}
 		return null;
+	}
+	
+	@Override
+	public Venta findByID(int id) throws SQLException {
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement instruccion = conn.prepareStatement(SQL_LISTAR + "WHERE id=" + id);
+		ResultSet rs = instruccion.executeQuery();
+		Venta venta = null;
+		while (rs.next()) {
+			 venta = toVenta(rs);
+		}
+
+		return venta;
 	}
 
 }
